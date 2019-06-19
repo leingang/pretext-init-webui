@@ -24,6 +24,10 @@
         {{ form.project_copyright_holder.label }}<br>
         {{ form.project_copyright_holder(size=32) }}
     </p>
+    <p>
+        {{ form.project_license.label }}
+        {{ form.project_license }}
+    </p>
     <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}
