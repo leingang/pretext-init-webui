@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Initialize your project</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.project_title.label }}<br>
+        {{ form.project_title(size=32) }}
+    </p>
+    <p>
+        {{ form.project_subtitle.label }}<br>
+        {{ form.project_subtitle(size=32) }}
+    </p>
+    <p>
+        {{ form.project_edition.label }}<br>
+        {{ form.project_edition(size=32) }}
+    </p>
+    <p>
+        {{ form.project_copyright_year.label }}<br>
+        {{ form.project_copyright_year(size=32) }}
+    </p>
+    <p>
+        {{ form.project_copyright_holder.label }}<br>
+        {{ form.project_copyright_holder(size=32) }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
