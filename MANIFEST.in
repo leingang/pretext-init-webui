@@ -1,0 +1,2 @@
+recursive-include pretext_init/templates *
+recursive-include pretext_init/static *
