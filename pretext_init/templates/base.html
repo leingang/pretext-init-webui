@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {% if title %}
+    <title>PreTeXt Init - {{ title }}</title>
+    {% else %}
+    <title>PreTeXt Init</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>
