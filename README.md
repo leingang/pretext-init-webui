@@ -4,6 +4,14 @@ PreTeXt Init description
 
 ## Quick Start
 
+Create the vitual environment:
+
+    make venv
+
+Install prerequisites into virtual environment:
+
+    venv/bin/pip install -r requirements.txt
+
 Run the application:
 
     make run
@@ -19,6 +27,8 @@ Some Flask dependencies are compiled during installation, so `gcc` and Python he
 For example, on Ubuntu:
 
     apt install build-essential python3-dev
+
+Other packages are in `requirements.txt`:
 
 
 ## Development environment and release process
@@ -57,3 +67,14 @@ working directory to create and write log files in it, and finally run a
 [WSGI container](http://flask.pocoo.org/docs/0.12/deploying/wsgi-standalone/) with the application.
 And, most likely, it will also run behind a
 [reverse proxy](http://flask.pocoo.org/docs/0.12/deploying/wsgi-standalone/#proxy-setups).
+
+## Todos
+
+* Merge with Oscar's project
+
+* Dynamically update authors
+
+* Outline fields
+
+* styling
+
