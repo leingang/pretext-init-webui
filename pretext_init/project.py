@@ -1,3 +1,4 @@
+from lxml import etree
 import yaml
 
 class Project(object):
@@ -26,9 +27,31 @@ def from_form(form):
     )
     return project
 
+def to_xml(project):
+    """Serialize a project as a string of XML"""
+    root = etree.Element('book')
+    root.set('{http://www.w3.org/XML/1998/namespace}id','main')
+    metadata = etree.SubElement(root,'metadata')
+    title = etree.SubElement(metadata,'title')
+    title.text = project.title
+    subtitle = etree.SubElement(metadata,'subtitle')
+    subtitle.text = project.subtitle
+    edition = etree.SubElement(metadata,'edition')
+    edition.text = project.edition
+    copyright = etree.SubElement(metadata,'copyright')
+    copyright_year = etree.SubElement(copyright,'year')
+    copyright_year.text = project.copyright_year
+    copyright_holder = etree.SubElement(copyright,'holder')
+    copyright_holder.text = project.copyright_holder
+    license = etree.SubElement(metadata,'license')
+    license.text = project.license
+    return etree.tostring(root,pretty_print=True)
 
 def to_yaml(project):
-    """serialize a project as a string of YAML"""
+    """Serialize a project as a string of YAML
+    
+    Don't use.  We're going with XML for now.
+    """
     project_dict = {
         'title': project.title,
         'subtitle': project.subtitle,

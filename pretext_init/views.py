@@ -15,9 +15,9 @@ def project_file():
     form = NewProjectForm()
     if form.validate_on_submit():
         project = ptx_project.from_form(form)
-        yaml = ptx_project.to_yaml(project)
+        yaml = ptx_project.to_xml(project)
         return Response(
             yaml,
-            mimetype="text/yaml",
-            headers={"Content-disposition":"attachment; filename=project.yml"})
+            mimetype="text/xml",
+            headers={"Content-disposition":"attachment; filename=project.xml"})
     return render_template('new_project.html', title='Initialize Project', form=form)
