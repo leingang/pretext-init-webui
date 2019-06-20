@@ -4,42 +4,70 @@
 <h1>Initialize your project</h1>
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.project_title.label }}<br>
-        {{ form.project_title(size=32) }}
-    </p>
-    <p>
-        {{ form.project_subtitle.label }}<br>
-        {{ form.project_subtitle(size=32) }}
-    </p>
-    <p>
-        {{ form.project_edition.label }}<br>
-        {{ form.project_edition(size=32) }}
-    </p>
-    <p>
-        {{ form.project_copyright_year.label }}<br>
-        {{ form.project_copyright_year(size=32) }}
-    </p>
-    <p>
-        {{ form.project_copyright_holder.label }}<br>
-        {{ form.project_copyright_holder(size=32) }}
-    </p>
-    <p>
-        {{ form.project_license.label }}
-        {{ form.project_license }}
-    </p>
-    {% for author_entry_form in form.authors %}
-    {{ author_entry_form.hidden_tag() }}
-    Author #{{ loop.index }}
-        <div>{{ author_entry_form.author_name.label }}</div>
-        <div>{{ author_entry_form.author_name(size=32) }}</div><br>
-        <div>{{ author_entry_form.author_institution.label }}</div>
-        <div>{{ author_entry_form.author_institution(size=32) }}</div><br>
-        <div>{{ author_entry_form.author_department.label }}</div>
-        <div>{{ author_entry_form.author_department(size=32) }}</div><br>
-        <div>{{ author_entry_form.author_email.label }}</div>
-        <div>{{ author_entry_form.author_email(size=32) }}</div><br>
-    {% endfor %}    
-    <p>{{ form.submit() }}</p>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#metadata">Metadata</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#authors">Author(s)</a></li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#outline">Outline</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#copyright">Copyright</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#settings">Settings</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="metadata" class="tab-pane container active">
+                <h3>Metadata</h3>
+                {{ form.project_title.label }}
+                {{ form.project_title(size=32) }}
+                <br>
+                {{ form.project_subtitle.label }}
+                {{ form.project_subtitle(size=32) }}
+                <br>
+                {{ form.project_edition.label }}
+                {{ form.project_edition(size=32) }}
+                <br>
+            </div>
+            <div id="authors" class="tab-pane container fade">
+                <h3>Author(s)</h3>
+                {% for author_entry_form in form.authors %}
+                {{ author_entry_form.hidden_tag() }}
+                Author #{{ loop.index }}
+                <div>{{ author_entry_form.author_name.label }}</div>
+                <div>{{ author_entry_form.author_name(size=32) }}</div><br>
+                <div>{{ author_entry_form.author_institution.label }}</div>
+                <div>{{ author_entry_form.author_institution(size=32) }}</div><br>
+                <div>{{ author_entry_form.author_department.label }}</div>
+                <div>{{ author_entry_form.author_department(size=32) }}</div><br>
+                <div>{{ author_entry_form.author_email.label }}</div>
+                <div>{{ author_entry_form.author_email(size=32) }}</div><br>
+                {% endfor %}
+            </div>
+            <div id="outline" class="tab-pane container fade">
+                <h3>Outline</h3>
+            </div>
+            <div id="copyright" class="tab-pane container fade">
+                <h3>Copyright</h3>
+                {{ form.project_copyright_year.label }}
+                {{ form.project_copyright_year(size=32) }}
+                <br>
+                {{ form.project_copyright_holder.label }}
+                {{ form.project_copyright_holder(size=32) }}
+                <br>
+                {{ form.project_license.label }}
+                {{ form.project_license }}
+            </div>
+            <div id="settings" class="tab-pane container fade">
+                One file per:
+            </div>
+        </div>
+        {{ form.submit() }}
+    </div>
 </form>
 {% endblock %}
