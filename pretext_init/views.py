@@ -12,7 +12,8 @@ def index():
 
 @app.route('/newproject',  methods=['GET', 'POST'])
 def project_file():
-    form = NewProjectForm()
+    form = NewProjectForm(authors=[{'name': 'Author 1'},{'name': 'Author 2'}])
+    form.project_license.choices = [(e['identifier'],e['title']) for e in app.config['LICENSES']]
     if form.validate_on_submit():
         # process form
         project = ptx_project.from_form(form)
@@ -21,6 +22,5 @@ def project_file():
             yaml,
             mimetype="text/xml",
             headers={"Content-disposition":"attachment; filename=project.xml"})
-    # set up and serve form
-    form.project_license.choices = [(e['identifier'],e['title']) for e in app.config['LICENSES']]
+    # if the form hasn't been submitted and validated, render and serve it instead
     return render_template('new_project.html', title='Initialize Project', form=form)
