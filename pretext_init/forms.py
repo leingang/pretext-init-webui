@@ -1,6 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, RadioField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, PasswordField, BooleanField, RadioField, SubmitField, FieldList, FormField
+from wtforms.validators import DataRequired, Email
+
+class AuthorForm(FlaskForm):
+    author_name = StringField('Name',validators=[DataRequired()])
+    author_institution = StringField('Institution')
+    author_department = StringField('Department')
+    author_email = StringField('Email',validators=[Email()])
 
 class NewProjectForm(FlaskForm):
     project_title = StringField('Title',validators=[DataRequired()])

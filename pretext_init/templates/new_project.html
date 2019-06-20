@@ -28,6 +28,18 @@
         {{ form.project_license.label }}
         {{ form.project_license }}
     </p>
+    {% for author_entry_form in form.authors %}
+    {{ author_entry_form.hidden_tag() }}
+    Author #{{ loop.index }}
+        <div>{{ author_entry_form.author_name.label }}</div>
+        <div>{{ author_entry_form.author_name(size=32) }}</div><br>
+        <div>{{ author_entry_form.author_institution.label }}</div>
+        <div>{{ author_entry_form.author_institution(size=32) }}</div><br>
+        <div>{{ author_entry_form.author_department.label }}</div>
+        <div>{{ author_entry_form.author_department(size=32) }}</div><br>
+        <div>{{ author_entry_form.author_email.label }}</div>
+        <div>{{ author_entry_form.author_email(size=32) }}</div><br>
+    {% endfor %}    
     <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}

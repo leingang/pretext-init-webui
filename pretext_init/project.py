@@ -9,6 +9,7 @@ class Project(object):
         edition=None,
         copyright_year=None, copyright_holder=None,
         license=None,
+        authors=None,
         **kwargs):
         self.title = title
         self.subtitle = subtitle
@@ -16,16 +17,31 @@ class Project(object):
         self.copyright_year = copyright_year
         self.copyright_holder = copyright_holder
         self.license = license
+        if authors is None:
+            self.authors = []
+        else:
+            self.authors = authors
+
 
 def from_form(form):
     """Create a project from a NewProjectForm"""
+    authors = []
+    for author_form in form.authors:
+        author = {
+            'name': author_form.author_name.data,
+            'institution': author_form.author_institution.data,
+            'department': author_form.author_department.data,
+            'email': author_form.author_email.data
+        }
+        authors.append(author)
     project = Project(
         title=form.project_title.data,
         subtitle=form.project_subtitle.data,
         edition=form.project_edition.data,
         copyright_year=form.project_copyright_year.data,
         copyright_holder=form.project_copyright_holder.data,
-        license=form.project_license.data
+        license=form.project_license.data,
+        authors=authors
     )
     return project
 
@@ -47,6 +63,13 @@ def to_xml(project):
     copyright_holder.text = project.copyright_holder
     license = etree.SubElement(metadata,'license')
     license.text = project.license
+    for author in project.authors:
+        author_element = etree.Element('author')
+        author_children = {}
+        for field in ['name','institution','department','email']:
+            author_children['field'] = etree.SubElement(author_element,field)
+            author_children['field'].text = author[field]
+        metadata.append(author_element)
     return etree.tostring(root,pretty_print=True)
 
 def to_yaml(project):
