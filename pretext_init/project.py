@@ -17,11 +17,12 @@ class Project(object):
 def from_form(form):
     """Create a project from a NewProjectForm"""
     project = Project(
-        title = form.project_title.data,
-        subtitle = form.project_subtitle.data,
-        edition = form.project_edition.data,
-        copyright_year = form.project_copyright_year.data,
-        copyright_holder = form.project_copyright_holder.data,
+        title=form.project_title.data,
+        subtitle=form.project_subtitle.data,
+        edition=form.project_edition.data,
+        copyright_year=form.project_copyright_year.data,
+        copyright_holder=form.project_copyright_holder.data,
+        license=form.project_license.data
     )
     return project
 
