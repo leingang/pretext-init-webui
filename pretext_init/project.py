@@ -8,12 +8,14 @@ class Project(object):
         title=None, subtitle=None, 
         edition=None,
         copyright_year=None, copyright_holder=None,
+        license=None,
         **kwargs):
         self.title = title
         self.subtitle = subtitle
         self.edition = edition
         self.copyright_year = copyright_year
         self.copyright_holder = copyright_holder
+        self.license = license
 
 def from_form(form):
     """Create a project from a NewProjectForm"""
