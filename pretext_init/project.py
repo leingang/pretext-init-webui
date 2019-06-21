@@ -24,7 +24,7 @@ class Project(object):
 
 
 def from_form(form):
-    """Create a project from a NewProjectForm"""
+    """Create a Project from a NewProjectForm"""
     authors = []
     for author_form in form.authors:
         author = {
@@ -50,7 +50,7 @@ def from_form(form):
     return project
 
 def to_xml(project):
-    """Serialize a project as a string of XML"""
+    """Serialize a Project as a string of XML"""
     root = etree.Element('book')
     XML_ID = '{http://www.w3.org/XML/1998/namespace}id'
     root.set(XML_ID,'main')

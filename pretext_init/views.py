@@ -23,8 +23,8 @@ def project_file():
         xml = ptx_project.to_xml(project)
         return Response(
             xml,
-            mimetype="text/xml"
-            #headers={"Content-disposition":"attachment; filename=project.xml"}
+            mimetype="text/xml",
+            headers={"Content-disposition":"attachment; filename=project.xml"}
         )
     # if the form hasn't been submitted and validated, render and serve it instead
     return render_template('new_project.html', title='Initialize Project', form=form)
