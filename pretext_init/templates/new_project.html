@@ -70,8 +70,8 @@
                         if (val < 1) { val=1; }
                         elt.value = val;
                         // adjust width of column
-                        spacer = document.getElementById("divisions-"+index+"-spacer")
-                        spacerWidth = val+1;
+                        spacer = elt.parentElement;
+                        spacerWidth = val;
                         spacer.className = "col-" + spacerWidth
                     }
                 </script>
@@ -80,20 +80,22 @@
                     {{ form.project_has_parts.label}}
                 </div>
                 {% for division_form in form.divisions %}
-                {{ division_form.hidden_tag() }}
-                <div class="form-group row">
+                <div class="form-group row" data-toggle="division-row">                    
                     <div class="col-2">
                         <button type="button" class="btn btn-light" onclick="changeLevel( {{ loop.index0 }}, 1)">&gt;</button>
                         <button type="button" class="btn btn-light" onclick="changeLevel( {{ loop.index0 }},-1)">&lt;</button>
                         <button type="button" class="btn btn-light">-</button>
                     </div>
-                    <div class="col-2" id="divisions-{{ loop.index0 }}-spacer">{{ division_form.title.label }}</div>
+                    <div class="col-1">
+                        {# This renders not only the CSRF tag but the "level" hidden field #}
+                        {{ division_form.hidden_tag() }}
+                    </div>
                     <div class="col">
-                        {{ division_form.title(size=32,class_="form-control") }}
-                        {{ division_form.level }}
+                        {{ division_form.title(size=16,class_="form-control") }}
                     </div>
                 </div>
                 {% endfor %}
+                <button type="button" data-toggle="outline-add-row" data-target="#division-row-group" class="btn btn-light">Add row</button>
             </div>
             <div id="copyright" class="tab-pane container fade">
                 <h3>Copyright</h3>
@@ -117,5 +119,7 @@
         </div>
         {{ form.submit(class_="btn btn-primary") }}
     </div>
+    <script type="text/javascript">
+    </script>
 </form>
 {% endblock %}
