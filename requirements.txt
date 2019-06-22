@@ -8,3 +8,5 @@ PyYAML==5.1.1
 Werkzeug==0.15.4
 WTForms==2.2.1
 lxml>=4.3.4
+python-slugify>=3.0.2
+text-unidecode>=1.2

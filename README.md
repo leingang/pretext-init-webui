@@ -74,8 +74,4 @@ And, most likely, it will also run behind a
 
 * Dynamically update authors
 
-* Outline fields
-
-  - slugs for divisions (populate from title, but allow editing)
-
 
