@@ -3,6 +3,10 @@ from wtforms import StringField, PasswordField, BooleanField, RadioField,\
     SubmitField, FieldList, FormField, HiddenField, IntegerField
 from wtforms.validators import DataRequired, Email
 
+import pretext_init.project as ptx_project
+
+DIVISIONS_MIN = 5
+
 class DivisionForm(FlaskForm):
     level = HiddenField('Level',default=1)
     title = StringField('Division')
@@ -20,10 +24,10 @@ class NewProjectForm(FlaskForm):
     project_date = StringField('Date')
     project_copyright_year = StringField('Copyright Year')
     project_copyright_holder = StringField('Copyright Holder')
-    project_license = RadioField('License')
+    project_license = RadioField('License',choices = [(e['identifier'],e['title']) for e in ptx_project.LICENSES])
     project_has_parts = BooleanField('My book has Parts')
     authors = FieldList(FormField(AuthorForm),min_entries=1)
-    divisions = FieldList(FormField(DivisionForm),min_entries=1)
+    divisions = FieldList(FormField(DivisionForm),min_entries=DIVISIONS_MIN)
     project_chunk = RadioField(
         'One file per',
         choices=[

@@ -12,13 +12,10 @@ def index():
 
 @app.route('/newproject',  methods=['GET', 'POST'])
 def project_file():
-    form = NewProjectForm(
-            authors=[{'name': 'Author 1'},{'name': 'Author 2'}],
-            divisions=[{} for i in range(1,5)]
-        )
-    form.project_license.choices = [(e['identifier'],e['title']) for e in app.config['LICENSES']]
+    form = NewProjectForm()
     if form.validate_on_submit():
         # process form
+        # TODO: overload NewProjectForm.populate_obj()
         project = ptx_project.from_form(form)
         xml = ptx_project.to_xml(project)
         return Response(
