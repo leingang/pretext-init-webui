@@ -106,6 +106,7 @@
         {{ form.submit(class_="btn btn-primary") }}
     </div>
 </form>
+{# Learned this from https://gist.github.com/kageurufu/6813878/ #}
 <script type="text/javascript">
     $(function() {
         $("#outline").each(function() {
@@ -155,7 +156,7 @@
                     }
                     // .val('').removeAttr("checked");
                 });
-                oldrow.after(row);   
+                oldrow.after(row);
             });
 
         });
