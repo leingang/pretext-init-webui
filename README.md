@@ -76,5 +76,7 @@ And, most likely, it will also run behind a
 
 * Outline fields
 
+  - slugs for divisions (populate from title, but allow editing)
+
 * styling
 
