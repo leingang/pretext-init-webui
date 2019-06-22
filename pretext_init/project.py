@@ -1,3 +1,4 @@
+from slugify import slugify
 from lxml import etree
 import yaml
 
@@ -97,9 +98,9 @@ def to_xml(project):
     current_level = 0
     current_element = outline
     level_stack = []
-    def get_id(short,lst):
-        return short + '-'.join(str(i) for i in lst)
     for (title,level) in project.outline:
+        # TODO: allow user to set slug in the form
+        slug = slugify(title)
         tag,short_tag = labels[level-1]
         element = etree.Element(tag)
         if (level > current_level):            
@@ -117,7 +118,7 @@ def to_xml(project):
                 v = level_stack.pop()
             level_stack.append(v+1)
             parent = current_element
-        element.set(XML_ID,get_id(short_tag,level_stack))
+        element.set(XML_ID,"{}-{}".format(short_tag,slug))
         etree.SubElement(element,'title').text = title
         parent.append(element)
         current_level = level
