@@ -10,6 +10,19 @@ def index():
     app.logger.warning('sample message')
     return render_template('index.html')
 
+# Projects
+class ProjectXmlResponse(Response):
+    def __init__(self,content,**kwargs):
+        super().__init__(content,mimetype="text/xml",**kwargs)
+
+
+class ProjectXmlAttachmentResponse(ProjectXmlResponse):
+    def __init__(self,content,filename='project.xml',**kwargs):
+        super().__init__(content,**kwargs)
+        self.headers['Content-disposition'] \
+             = "attachment; filename={}" . format(filename)
+
+
 @app.route('/newproject',  methods=['GET', 'POST'])
 def project_file():
     form = NewProjectForm()
@@ -18,10 +31,8 @@ def project_file():
         # TODO: overload NewProjectForm.populate_obj()
         project = ptx_project.from_form(form)
         xml = ptx_project.to_xml(project)
-        return Response(
-            xml,
-            mimetype="text/xml",
-            headers={"Content-disposition":"attachment; filename=project.xml"}
-        )
+        return ProjectXmlAttachmentResponse(xml)
     # if the form hasn't been submitted and validated, render and serve it instead
-    return render_template('new_project.html', title='Initialize Project', form=form)
+    return render_template('new_project.html',
+        title='Initialize Project',
+        form=form)
