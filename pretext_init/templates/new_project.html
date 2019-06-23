@@ -106,27 +106,37 @@
         {{ form.submit(class_="btn btn-primary") }}
     </div>
 </form>
-{# Learned this from https://gist.github.com/kageurufu/6813878/ #}
+{# 
+   Learned this from https://gist.github.com/kageurufu/6813878/ 
+   $() is shorthand for $( document ).ready()
+   See https://learn.jquery.com/using-jquery-core/document-ready/
+#}
 <script type="text/javascript">
     $(function() {
         $("#outline").each(function() {
             // console.log($(this));
+            // $this is an ordinary variable, but the dollar sign is used by
+            // convention to show that it contains jQuery objects.
+            // See also https://learn.jquery.com/using-jquery-core/jquery-object/
             var $this = $(this);
                 
             $this.find("button[data-toggle='increment-level']").click(function(){
                 // console.log($(this));
-                var target = $($(this).data("target"))[0];
-                target.value = parseInt(target.value)+1;
-                target.parentElement.className = 'col-' + target.value;
+                var $target = $(this).parents("[data-toggle='division-row']").eq(0).find("[id $='level']");
+                var value = parseInt($target.val());
+                value +=1;
+                $target.val(value);
+                $target.parent().attr('class','col-' + value);
             });
 
             $this.find("button[data-toggle='decrement-level']").click(function(){
-                var target = $($(this).data("target"))[0];
-                var newval = parseInt(target.value)-1;
-                if (newval < 1) { newval = 1; }
-                target.value = newval;
+                var $target = $(this).parents("[data-toggle='division-row']").eq(0).find("[id $='level']");
+                var value = parseInt($target.val());
+                value -=1;
+                if (value < 1) { value = 1; }
+                $target.val(value);
                 // TODO: use .change() to make this DRY
-                target.parentElement.className = 'col-' + target.value;
+                $target.parent().attr('class','col-' + value);
             });
 
             //Add new entry 
